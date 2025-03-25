@@ -17,6 +17,7 @@ def get_most_watched_genre(user_data):
     # If the user hasn't watched any movies, return None
     if not user_data["watched"]:
         return None
+<<<<<<< HEAD
 
     genre_count = {}
 
@@ -33,7 +34,27 @@ def get_most_watched_genre(user_data):
     # return genre with highest count of movies
     most_watched = max(genre_count, key=genre_count.get)
     return most_watched
+=======
+    
+def add_to_watched(user_data, movie):
+    user_data["watched"].append(movie)
 
+    return user_data
+>>>>>>> 0edb5d50fe299586417af7e8d6047daca2bcdf59
+
+def add_to_watchlist(user_data, movie):
+    user_data["watchlist"].append(movie)
+
+    return user_data
+
+def watch_movie(user_data, title):
+    for movie in user_data["watchlist"]:
+        if movie["title"] == title:
+            user_data["watchlist"].remove(movie)
+            user_data["watched"].append(movie)
+            break
+    
+    return user_data
 
 
         
