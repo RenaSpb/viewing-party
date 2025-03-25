@@ -59,15 +59,44 @@ def get_most_watched_genre(user_data):
     most_watched = max(genre_count, key=genre_count.get)
     return most_watched
 
+    
+# get list of movies user has watched, but friends haven't.
+def get_unique_watched(user_data):
+    unique_movies = []
+
+    friends_watched = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in friends_watched:
+                friends_watched.append(movie)
+
+    for movie in user_data["watched"]:
+        if movie not in friends_watched:
+            unique_movies.append(movie)
+
+    return unique_movies
+
 
 def get_friends_unique_watched(user_data):
-    friends_movie = []
+    friends_movie_for_user = []
 
     user_watched = set()
     for movie in user_data["watched"]:
         user_watched.add(movie["title"])
 
-    
+    friends_watched = set()
+    for friend in user_data["friens"]:
+        for movie in friend:
+            if movie["title"] not in user_watched:
+                friends_movie_for_user.append(movie["title"])
+            friends_watched.add(movie["title"])
+
+    return friends_movie_for_user
+        
+
+
+
+        
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
