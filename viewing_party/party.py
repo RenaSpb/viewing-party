@@ -59,10 +59,15 @@ def get_most_watched_genre(user_data):
     most_watched = max(genre_count, key=genre_count.get)
     return most_watched
 
-# -----------------------------------------
-# ------------- WAVE 3--------------------
-# -----------------------------------------
-        
+
+def get_friends_unique_watched(user_data):
+    friends_movie = []
+
+    user_watched = set()
+    for movie in user_data["watched"]:
+        user_watched.add(movie["title"])
+
+    
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
