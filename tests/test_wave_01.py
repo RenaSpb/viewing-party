@@ -158,8 +158,11 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # Assert
     assert len(updated_data["watchlist"]) == 0
     assert len(updated_data["watched"]) == 1
-    assert updated_data["watched"][0]["title"] == MOVIE_TITLE_1 
-    #raise Exception("Test needs to be completed.")
+
+    watched_movie = updated_data["watched"][0]
+    assert watched_movie["title"] == MOVIE_TITLE_1
+    assert watched_movie["rating"] == RATING_1
+    assert watched_movie["genre"] == GENRE_1
     
 
 def test_moves_movie_from_watchlist_to_watched():
@@ -178,11 +181,13 @@ def test_moves_movie_from_watchlist_to_watched():
 
     # Assert
     assert len(updated_data["watchlist"]) == 1
-    assert len(updated_data["watched"]) == 2
     assert movie_to_watch not in updated_data["watchlist"]
+    assert updated_data["watchlist"] == [FANTASY_1]
+
+    assert len(updated_data["watched"]) == 2
+    assert FANTASY_2 in updated_data["watched"]
     assert movie_to_watch in updated_data["watched"]
-    
-    #raise Exception("Test needs to be completed.")
+    assert updated_data["watched"] == [FANTASY_2, movie_to_watch]
 
 
 def test_does_nothing_if_movie_not_in_watchlist():
